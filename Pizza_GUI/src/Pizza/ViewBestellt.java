@@ -73,4 +73,9 @@ public class ViewBestellt extends JDialog
 			}
 		return lblNewLabel;
 	}
+
+	public void setzeListener(ActionListener okbutton)
+	{
+
+	}
 }

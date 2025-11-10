@@ -1,9 +1,7 @@
 
 package Pizza;
 
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
 import javax.swing.DefaultComboBoxModel;
@@ -22,7 +20,7 @@ public class View extends JFrame
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JLabel lblNewLabel;
-	private JComboBox comboBoxPizza;
+	private JComboBox<Pizza> comboBoxPizza;
 	private JLabel lblNewLabel_1;
 	private JComboBox comboBoxExtras;
 	private JComboBox comboBoxGroesse;
@@ -35,7 +33,6 @@ public class View extends JFrame
 	private JLabel lblNewLabel_4;
 	private JLabel lblNewLabelGesamt;
 	private JLabel lblNewLabelBetrag;
-	private Controller controller;
 
 	/**
 	 * Launch the application.
@@ -44,11 +41,11 @@ public class View extends JFrame
 	/**
 	 * Create the frame.
 	 */
-	public View(Controller controller)
+	public View()
 	{
 
 		initialize();
-		this.controller = controller;
+
 	}
 
 	private void initialize()
@@ -91,20 +88,7 @@ public class View extends JFrame
 		if (comboBoxPizza == null)
 			{
 				comboBoxPizza = new JComboBox();
-				comboBoxPizza.addItemListener(new ItemListener()
-				{
 
-					public void itemStateChanged(ItemEvent e)
-					{
-						if (e.getStateChange() == ItemEvent.SELECTED)
-							{
-								controller.befülleExtras();
-								controller.befülleGrößen();
-								controller.setPreisLabel();
-							}
-
-					}
-				});
 				comboBoxPizza.setBounds(79, 7, 106, 22);
 			}
 		return comboBoxPizza;
@@ -125,19 +109,7 @@ public class View extends JFrame
 		if (comboBoxExtras == null)
 			{
 				comboBoxExtras = new JComboBox();
-				comboBoxExtras.addItemListener(new ItemListener()
-				{
 
-					public void itemStateChanged(ItemEvent e)
-					{
-
-						if (e.getStateChange() == ItemEvent.SELECTED)
-							{
-								controller.berechnePreis();
-								controller.setPreisLabel();
-							}
-					}
-				});
 				comboBoxExtras.setBounds(79, 45, 106, 22);
 			}
 		return comboBoxExtras;
@@ -148,20 +120,7 @@ public class View extends JFrame
 		if (comboBoxGroesse == null)
 			{
 				comboBoxGroesse = new JComboBox();
-				comboBoxGroesse.addItemListener(new ItemListener()
-				{
 
-					public void itemStateChanged(ItemEvent e)
-					{
-						if (e.getStateChange() == ItemEvent.SELECTED)
-							{
-								controller.berechnePreis();
-								controller.setPreisLabel();
-
-							}
-
-					}
-				});
 				comboBoxGroesse.setBounds(263, 7, 88, 22);
 			}
 		return comboBoxGroesse;
@@ -235,14 +194,6 @@ public class View extends JFrame
 		if (hinzufuegeButton == null)
 			{
 				hinzufuegeButton = new JButton("Hinzufügen");
-				hinzufuegeButton.addActionListener(new ActionListener()
-				{
-
-					public void actionPerformed(ActionEvent e)
-					{
-						controller.hinzufuegen();
-					}
-				});
 
 				hinzufuegeButton.setBounds(361, 84, 89, 23);
 			}
@@ -254,14 +205,7 @@ public class View extends JFrame
 		if (entfernenButton == null)
 			{
 				entfernenButton = new JButton("Entfernen");
-				entfernenButton.addActionListener(new ActionListener()
-				{
 
-					public void actionPerformed(ActionEvent e)
-					{
-						controller.entfernen();
-					}
-				});
 				entfernenButton.setBounds(361, 130, 89, 23);
 			}
 		return entfernenButton;
@@ -272,15 +216,7 @@ public class View extends JFrame
 		if (bestellenButton == null)
 			{
 				bestellenButton = new JButton("Bestellen");
-				bestellenButton.addActionListener(new ActionListener()
-				{
 
-					public void actionPerformed(ActionEvent e)
-					{
-						controller.bestellen();
-
-					}
-				});
 				bestellenButton.setBounds(361, 172, 89, 45);
 			}
 		return bestellenButton;
@@ -291,7 +227,7 @@ public class View extends JFrame
 		if (lblNewLabel_4 == null)
 			{
 				lblNewLabel_4 = new JLabel("Gesamtpreis");
-				lblNewLabel_4.setBounds(23, 242, 70, 14);
+				lblNewLabel_4.setBounds(23, 242, 88, 14);
 			}
 		return lblNewLabel_4;
 	}
@@ -329,5 +265,23 @@ public class View extends JFrame
 	public void setWarenkorbModel(DefaultListModel<Pizza> warenkorb)
 	{
 		getList().setModel(warenkorb);
+	}
+
+	public void setzeListener(ActionListener hinzufuegen, ActionListener entfernen, ItemListener pizzaaendern,
+			ItemListener groesseaendern, ItemListener extraaendern, ActionListener bestelen)
+	{
+		getHinzufuegeButton().addActionListener(hinzufuegen);
+		getComboBoxPizza().addItemListener(pizzaaendern);
+		getComboBoxExtras().addItemListener(extraaendern);
+		getComboBoxGroesse().addItemListener(groesseaendern);
+		getEntfernenButton().addActionListener(entfernen);
+		getBestellenButton().addActionListener(bestelen);
+
+	}
+
+	public Pizza getPizzaAuswahl()
+	{
+		// TODO Automatisch generierter Methodenstub
+		return (Pizza) getComboBoxPizza().getSelectedItem();
 	}
 }

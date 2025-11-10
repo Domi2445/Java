@@ -1,6 +1,10 @@
 
 package Pizza;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +17,7 @@ public class Controller
 	List<Pizza> pizzen = new ArrayList<>();
 
 	View view;
+
 	ViewBestellt dialog;
 	DefaultComboBoxModel<Pizza> pizzaAuwahl;
 	DefaultComboBoxModel<Groessen> groessenauswahl;
@@ -21,12 +26,113 @@ public class Controller
 
 	public Controller()
 	{
-		view = new View(this);
+		view = new View();
 		view.setVisible(true);
 		dialog = new ViewBestellt(this);
 
 		erzeugeModels();
+		erzeugeListener();
 		erzeugeTestdaten();
+	}
+
+	private void erzeugeListener()
+	{
+
+		// LISTENER ERZEUGEN!!
+
+		ActionListener hinzufuegen = new ActionListener()
+		{
+
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				hinzufuegen();
+
+			}
+		};
+
+		ActionListener entfernen = new ActionListener()
+		{
+
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				entfernen();
+
+			}
+		};
+
+		ItemListener pizzaaendern = new ItemListener()
+		{
+
+			@Override
+			public void itemStateChanged(ItemEvent e)
+			{
+				if (e.getStateChange() == ItemEvent.SELECTED)
+					{
+						befülleExtras();
+						befülleGrößen();
+						setPreisLabel();
+					}
+
+			}
+		};
+
+		ItemListener groesseaendern = new ItemListener()
+		{
+
+			@Override
+			public void itemStateChanged(ItemEvent e)
+			{
+
+				if (e.getStateChange() == ItemEvent.SELECTED)
+					{
+						berechnePreis();
+						setPreisLabel();
+
+					}
+			}
+		};
+
+		ItemListener extraaendern = new ItemListener()
+		{
+
+			@Override
+			public void itemStateChanged(ItemEvent e)
+			{
+				berechnePreis();
+				setPreisLabel();
+
+			}
+		};
+
+		ActionListener bestelen = new ActionListener()
+		{
+
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				bestellen();
+
+			}
+		};
+
+		ActionListener okbutton = new ActionListener()
+		{
+
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				// TODO Automatisch generierter Methodenstub
+
+			}
+		};
+
+		// Vereinbarung mit GUI Designer was gibt es an Funktionalität
+
+		view.setzeListener(hinzufuegen, entfernen, pizzaaendern, groesseaendern, extraaendern, bestelen);
+		dialog.setzeListener(okbutton);
+
 	}
 
 	private void erzeugeModels()
@@ -60,14 +166,21 @@ public class Controller
 		hawaii.addGroesse(new Groessen(16.0, "Party"));
 		hawaii.addExtra(new Extras("Champignons", 1.30));
 
+		Pizza margeritha = new Pizza("Margeritha");
+		margeritha.addExtra(new Extras("Tomaten", 2.00));
+		margeritha.addGroesse(new Groessen(6.0, "klein"));
+
 		pizzaAuwahl.addElement(salami);
 		pizzaAuwahl.addElement(hawaii);
+		pizzaAuwahl.addElement(margeritha);
 	}
 
 	public void befülleExtras()
 	{
 		extrasAuswahl.removeAllElements();
-		Pizza pizza = (Pizza) view.getComboBoxPizza().getSelectedItem();
+		Pizza pizzaalt = (Pizza) view.getComboBoxPizza().getSelectedItem();
+
+		Pizza pizza = (Pizza) view.getPizzaAuswahl();
 
 		if (pizza != null)
 			{
@@ -118,7 +231,7 @@ public class Controller
 		double preis = berechnePreis();
 		String preisString = String.format("%.2f €", preis);
 		view.getLblNewLabelBetrag().setText(preisString);
-		System.out.println(preis);
+		// System.out.println(preis);
 	}
 
 	public void hinzufuegen()
@@ -129,13 +242,11 @@ public class Controller
 
 		if (pizza != null && groesse != null && extras != null)
 			{
-				// Erstelle eine neue Pizza mit diesen Werten
+
 				Pizza bestelltePizza = new Pizza(pizza.getName(), groesse, extras);
 
-				// Füge sie in die JList (Model) ein
 				warenkorb.addElement(bestelltePizza);
 
-				// Aktualisiere Gesamtpreis
 				berechneGesamtpreis();
 			}
 	}
@@ -144,14 +255,12 @@ public class Controller
 	{
 		double gesamt = 0.0;
 
-		// Durch alle Pizzen im Warenkorb iterieren
 		for (int i = 0; i < warenkorb.getSize(); i++)
 			{
 				Pizza p = warenkorb.getElementAt(i);
 				gesamt += p.getGroesse().getPreis() + p.getExtras().getPreis();
 			}
 
-		// Gesamtpreis im Label anzeigen
 		view.getLblNewLabelGesamt().setText(String.format("%.2f €", gesamt));
 	}
 
@@ -162,16 +271,15 @@ public class Controller
 
 		if (selectedPizza != null)
 			{
-				// Element aus dem Modell entfernen
+
 				warenkorb.removeElement(selectedPizza);
-				// Gesamtpreis aktualisieren
 				berechneGesamtpreis();
 			}
 	}
 
 	public void bestellen()
 	{
-		// Bestellung abschließen, liste anzeigen, JDialog anzeigen usw.
+
 		dialog.setVisible(true);
 
 	}
