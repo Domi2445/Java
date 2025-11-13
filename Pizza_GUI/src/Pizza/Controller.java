@@ -17,6 +17,7 @@ public class Controller
 	List<Pizza> pizzen = new ArrayList<>();
 
 	View view;
+	Dv dv;
 
 	ViewBestellt dialog;
 	DefaultComboBoxModel<Pizza> pizzaAuwahl;
@@ -26,6 +27,8 @@ public class Controller
 
 	public Controller()
 	{
+		dv = new Dv();
+
 		view = new View();
 		view.setVisible(true);
 		dialog = new ViewBestellt(this);
@@ -151,28 +154,31 @@ public class Controller
 	private void erzeugeTestdaten()
 	{
 		// Beispielpizza 1
-		Pizza salami = new Pizza("Salami");
-		salami.addGroesse(new Groessen(5.0, "Klein"));
-		salami.addGroesse(new Groessen(7.5, "Groß"));
-		salami.addExtra(new Extras("Schinken", 1.0));
-		salami.addExtra(new Extras("Pilze", 1.5));
+		/*
+		 * Pizza salami = new Pizza("Salami"); salami.addGroesse(new Groessen(5.0,
+		 * "Klein")); salami.addGroesse(new Groessen(7.5, "Groß")); salami.addExtra(new
+		 * Extras("Schinken", 1.0)); salami.addExtra(new Extras("Pilze", 1.5));
+		 * 
+		 * // Beispielpizza 2 Pizza hawaii = new Pizza("Hawaii"); hawaii.addGroesse(new
+		 * Groessen(5.5, "Klein")); hawaii.addGroesse(new Groessen(8.0, "Groß"));
+		 * hawaii.addExtra(new Extras("Ananas", 1.0)); hawaii.addExtra(new
+		 * Extras("Schinken", 1.2)); hawaii.addGroesse(new Groessen(16.0, "Party"));
+		 * hawaii.addExtra(new Extras("Champignons", 1.30));
+		 * 
+		 * Pizza margeritha = new Pizza("Margeritha"); margeritha.addExtra(new
+		 * Extras("Tomaten", 2.00)); margeritha.addGroesse(new Groessen(6.0, "klein"));
+		 * 
+		 * pizzaAuwahl.addElement(salami); pizzaAuwahl.addElement(hawaii);
+		 * pizzaAuwahl.addElement(margeritha);
+		 */
 
-		// Beispielpizza 2
-		Pizza hawaii = new Pizza("Hawaii");
-		hawaii.addGroesse(new Groessen(5.5, "Klein"));
-		hawaii.addGroesse(new Groessen(8.0, "Groß"));
-		hawaii.addExtra(new Extras("Ananas", 1.0));
-		hawaii.addExtra(new Extras("Schinken", 1.2));
-		hawaii.addGroesse(new Groessen(16.0, "Party"));
-		hawaii.addExtra(new Extras("Champignons", 1.30));
+		List<Pizza> gelesenePizzas = dv.LeseDatei();
 
-		Pizza margeritha = new Pizza("Margeritha");
-		margeritha.addExtra(new Extras("Tomaten", 2.00));
-		margeritha.addGroesse(new Groessen(6.0, "klein"));
+		for (Pizza p : gelesenePizzas)
+			{
+				pizzaAuwahl.addElement(p);
+			}
 
-		pizzaAuwahl.addElement(salami);
-		pizzaAuwahl.addElement(hawaii);
-		pizzaAuwahl.addElement(margeritha);
 	}
 
 	public void befülleExtras()
@@ -279,7 +285,7 @@ public class Controller
 
 	public void bestellen()
 	{
-
+		dv.schreibeDatei(warenkorb);
 		dialog.setVisible(true);
 
 	}
