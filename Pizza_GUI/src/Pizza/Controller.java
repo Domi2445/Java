@@ -1,7 +1,6 @@
 
 package Pizza;
 
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -43,98 +42,44 @@ public class Controller
 
 		// LISTENER ERZEUGEN!!
 
-		ActionListener hinzufuegen = new ActionListener()
+		ActionListener hinzufuegen = e -> hinzufuegen();
+
+		ActionListener entfernen = e -> entfernen();
+
+		ItemListener pizzaaendern = e ->
 		{
+			if (e.getStateChange() == ItemEvent.SELECTED)
+				{
+					befülleExtras();
+					befülleGrößen();
+					setPreisLabel();
+				}
 
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				hinzufuegen();
-
-			}
 		};
 
-		ActionListener entfernen = new ActionListener()
+		ItemListener groesseaendern = e ->
 		{
 
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				entfernen();
+			if (e.getStateChange() == ItemEvent.SELECTED)
+				{
+					berechnePreis();
+					setPreisLabel();
 
-			}
+				}
 		};
 
-		ItemListener pizzaaendern = new ItemListener()
+		ItemListener extraaendern = e ->
 		{
+			berechnePreis();
+			setPreisLabel();
 
-			@Override
-			public void itemStateChanged(ItemEvent e)
-			{
-				if (e.getStateChange() == ItemEvent.SELECTED)
-					{
-						befülleExtras();
-						befülleGrößen();
-						setPreisLabel();
-					}
-
-			}
 		};
 
-		ItemListener groesseaendern = new ItemListener()
-		{
-
-			@Override
-			public void itemStateChanged(ItemEvent e)
-			{
-
-				if (e.getStateChange() == ItemEvent.SELECTED)
-					{
-						berechnePreis();
-						setPreisLabel();
-
-					}
-			}
-		};
-
-		ItemListener extraaendern = new ItemListener()
-		{
-
-			@Override
-			public void itemStateChanged(ItemEvent e)
-			{
-				berechnePreis();
-				setPreisLabel();
-
-			}
-		};
-
-		ActionListener bestelen = new ActionListener()
-		{
-
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				bestellen();
-
-			}
-		};
-
-		ActionListener okbutton = new ActionListener()
-		{
-
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				// TODO Automatisch generierter Methodenstub
-
-			}
-		};
+		ActionListener bestelen = e -> bestellen();
 
 		// Vereinbarung mit GUI Designer was gibt es an Funktionalität
 
 		view.setzeListener(hinzufuegen, entfernen, pizzaaendern, groesseaendern, extraaendern, bestelen);
-		dialog.setzeListener(okbutton);
 
 	}
 
