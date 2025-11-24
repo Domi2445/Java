@@ -1,24 +1,49 @@
 
 package Nozama;
 
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
 import javax.swing.DefaultListModel;
 
 public class NozamaController
 {
 
-	View view;
-	Produkt produkt;
-	DefaultListModel<Produkt> artikel;
-	DefaultListModel<Produkt> warenkorb;
+	
+	private View view;
+	private Produkt produkt;
+	private DefaultListModel<Produkt> artikel;
+	private DefaultListModel<Produkt> warenkorb;
+	
 
 	public NozamaController()
 	{
 		view = new View();
 
 		erstelleModels();
-		erzeugeTestdaten();
+		erzeugeActionlistener();
+		//erzeugeTestdaten();
+		einlesenTestwerte();
 		starten();
+		
+		
 
+	}
+
+	private void einlesenTestwerte()
+	{
+		Dateihandler dateiHandler= new DateihandlerIO("Artikeldatei Nozama.txt");
+		
+		ArrayList<Produkt> produkte = dateiHandler.lesen();
+		
+	
+		
+		for (Produkt produkt : produkte)
+			{
+				artikel.addElement(produkt);
+				//System.out.println(produkt);
+			}
+		
 	}
 
 	private void erzeugeTestdaten()
@@ -26,6 +51,33 @@ public class NozamaController
 		Produkt produkt = new Produkt(1, "Papier", 5.0);
 		artikel.addElement(produkt);
 
+	
+
+	}
+
+	public void erzeugeActionlistener()
+	{
+		
+		ActionListener hinzufuegen = e -> hinzufuegen();
+
+		ActionListener entfernen = e -> entfernen();
+
+		ActionListener abschließen = e -> schreiben();
+
+		view.setzeActionlistener(hinzufuegen, entfernen, abschließen);
+	}
+
+	private void  schreiben()
+	{
+		Dateihandler dateihandler = new DateihandlerIO(view.getKundenname() + ".csv");
+		
+		dateihandler.schreiben(warenkorb);
+		
+		warenkorb.clear();
+		
+		
+		
+		
 	}
 
 	private void starten()
@@ -42,6 +94,27 @@ public class NozamaController
 
 		view.setzeartikel(artikel);
 		view.setzeWarenkorb(warenkorb);
+	}
+
+
+
+	
+
+	private void hinzufuegen()
+	{
+		Produkt p = (Produkt) view.getListArtikel().getSelectedValue();
+
+		warenkorb.addElement(p);
+		artikel.removeElement(p);
+	}
+
+	private void entfernen()
+	{
+		Produkt p = (Produkt) view.getListBestellung().getSelectedValue();
+
+		warenkorb.removeElement(p);
+		artikel.addElement(p);
+
 	}
 
 }

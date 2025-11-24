@@ -1,6 +1,8 @@
 
 package Nozama;
 
+import java.awt.event.ActionListener;
+
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -96,7 +98,7 @@ public class View extends JFrame
 		return lblNewLabel;
 	}
 
-	private JTextField getTextFieldName()
+	public JTextField getTextFieldName()
 	{
 		if (textFieldName == null)
 			{
@@ -163,4 +165,18 @@ public class View extends JFrame
 		listBestellung.setModel(warenkorb);
 
 	}
+
+	public void setzeActionlistener(ActionListener hinzufuegen, ActionListener entfernen, ActionListener abschließen)
+	{
+		btnNewButtonEntfernen.addActionListener(entfernen);
+		btnNewHinzufügen.addActionListener(hinzufuegen);
+		ButtonAbschliessen.addActionListener(abschließen);
+
+	}
+
+	public String getKundenname()
+	{
+		return textFieldName.getText().trim();
+	}
+
 }
