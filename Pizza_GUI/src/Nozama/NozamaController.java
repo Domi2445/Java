@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
+import javax.swing.JFileChooser;
 
 public class NozamaController
 {
@@ -75,6 +76,9 @@ public class NozamaController
 		
 		warenkorb.clear();
 		
+		view.dispose();
+		
+		
 		
 		
 		
@@ -116,5 +120,15 @@ public class NozamaController
 		artikel.addElement(p);
 
 	}
-
+	
+	private void speichern()
+	{
+		JFileChooser chooser = new JFileChooser();
+		int returnvalue = chooser.showSaveDialog(view);
+		
+		if(returnvalue == JFileChooser.APPROVE_OPTION)
+		{
+				
+		}
+	}
 }
