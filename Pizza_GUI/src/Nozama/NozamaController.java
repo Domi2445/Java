@@ -123,6 +123,7 @@ public class NozamaController
 	
 	private void speichern()
 	{
+		Dateihandler dh = new DateihandlerNIO();
 		JFileChooser chooser = new JFileChooser();
 		int returnvalue = chooser.showSaveDialog(view);
 		
