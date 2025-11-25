@@ -1,10 +1,10 @@
 package Nozama;
 
 import java.io.IOException;
-import java.nio.file.FileSystemAlreadyExistsException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 
 public class DateihandlerNIO extends Dateihandler
 {
@@ -12,7 +12,7 @@ public class DateihandlerNIO extends Dateihandler
 	{
 		try
 			{
-				writer = Files.newBufferedWriter(path, append);
+				writer = Files.newBufferedWriter(path, StandardCharsets.UTF_8, StandardOpenOption.APPEND);
 			}
 		catch (IOException e)
 			{

@@ -2,6 +2,9 @@
 package Nozama;
 
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileReader;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
@@ -123,13 +126,15 @@ public class NozamaController
 	
 	private void speichern()
 	{
-		Dateihandler dh = new DateihandlerNIO();
+		
 		JFileChooser chooser = new JFileChooser();
 		int returnvalue = chooser.showSaveDialog(view);
+		File selectedFile;
 		
 		if(returnvalue == JFileChooser.APPROVE_OPTION)
 		{
-				
+			
+				Dateihandler dh = new DateihandlerNIO(chooser.getSelectedFile().toPath());
 		}
 	}
 }
