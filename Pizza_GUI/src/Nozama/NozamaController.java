@@ -125,17 +125,5 @@ public class NozamaController
 
 	}
 	
-	private void speichern()
-	{
-		
-		JFileChooser chooser = new JFileChooser();
-		int returnvalue = chooser.showSaveDialog(view);
-		File selectedFile;
-		
-		if(returnvalue == JFileChooser.APPROVE_OPTION)
-		{
-			
-				Dateihandler dh = new DateihandlerNIO(chooser.getSelectedFile().toPath());
-		}
-	}
+	
 }
