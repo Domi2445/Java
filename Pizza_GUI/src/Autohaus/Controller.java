@@ -18,7 +18,7 @@ public class Controller
 	}
 	private void erzeugeModels()
 	{
-		DefaultComboBoxModel<Auto> model = new DefaultComboBoxModel<>();
+		DefaultComboBoxModel<Model> model = new DefaultComboBoxModel<>();
 		
 		
 	}

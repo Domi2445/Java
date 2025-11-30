@@ -3,7 +3,7 @@ package Autohaus;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Auto
+public class Model
 {
 	private String model;
 	private String farbe;
@@ -13,7 +13,7 @@ public class Auto
 	private List<Integer> pss;
 	private List<Double> preise;
 	
-	public Auto(String model, String farbe, int ps, double preis)
+	public Model(String model, String farbe, int ps, double preis)
 	{
 		super();
 		this.model = model;
@@ -22,7 +22,7 @@ public class Auto
 		this.preis = preis;
 	}
 	
-	public Auto(String model)
+	public Model(String model)
 	{
 		this.model = model;
 		farben = new ArrayList<>();
