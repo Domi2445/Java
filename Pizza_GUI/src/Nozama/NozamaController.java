@@ -6,9 +6,12 @@ import java.io.File;
 import java.io.FileReader;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
+
+
 
 public class NozamaController
 {
@@ -37,7 +40,7 @@ public class NozamaController
 	private void einlesenTestwerte()
 	{
 		Dateihandler dateiHandler= new DateihandlerIO("Artikeldatei Nozama.txt");
-		
+	
 		ArrayList<Produkt> produkte = dateiHandler.lesen();
 		
 	
@@ -74,9 +77,9 @@ public class NozamaController
 
 	private void  schreiben()
 	{
-		Dateihandler dateihandler = new DateihandlerIO(view.getKundenname() + ".csv");
-		
+		Dateihandler dateihandler = new DateihandlerSer();
 		dateihandler.schreiben(warenkorb);
+		
 		
 		warenkorb.clear();
 		
