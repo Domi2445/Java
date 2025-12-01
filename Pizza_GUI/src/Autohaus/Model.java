@@ -6,44 +6,33 @@ import java.util.List;
 public class Model
 {
 	private String model;
-	private String farbe;
-	private int ps;
-	private double preis;
-	private List<String> farben;
-	private List<Integer> pss;
-	private List<Double> preise;
+	private Farbe farbe;
+	private Extras extras;
+	private Ps ps;
 	
-	public Model(String model, String farbe, int ps, double preis)
+	private List<Farbe> farbenListe = new ArrayList<>();
+	private List<Ps> psListe = new ArrayList<>();
+	
+	//Konstruktor
+	public Model(String model, Farbe farbe,  Ps ps)
 	{
 		super();
 		this.model = model;
 		this.farbe = farbe;
+		
 		this.ps = ps;
-		this.preis = preis;
+	}
+
+	//Methode zum farben Hinzufügen
+	public void addFarbe(Farbe farbe)
+	{
+		farbenListe.add(farbe);
 	}
 	
-	public Model(String model)
+	//Methode zum Ps hinzufügen
+	public void addPs(Ps ps)
 	{
-		this.model = model;
-		farben = new ArrayList<>();
-		pss = new ArrayList<>();
-		preise = new ArrayList<>();
-	}
-	
-	
-	public void addPreis(double preis)
-	{
-		preise.add(preis);
-	}
-	
-	public void addFarbe(String farbe)
-	{
-		farben.add(farbe);
-	}
-	
-	public void addPS(int ps)
-	{
-		pss.add(ps);
+		this.psListe.add(ps);
 	}
 
 	
@@ -59,77 +48,70 @@ public class Model
 	}
 
 	
-	public String getFarbe()
+	public Farbe getFarbe()
 	{
 		return farbe;
 	}
 
 	
-	public void setFarbe(String farbe)
+	public void setFarbe(Farbe farbe)
 	{
 		this.farbe = farbe;
 	}
 
 	
-	public int getPs()
+	public Extras getExtras()
+	{
+		return extras;
+	}
+
+	
+	public void setExtras(Extras extras)
+	{
+		this.extras = extras;
+	}
+
+	
+	public Ps getPs()
 	{
 		return ps;
 	}
 
 	
-	public void setPs(int ps)
+	public void setPs(Ps ps)
 	{
 		this.ps = ps;
 	}
 
 	
-	public double getPreis()
+	public List<Farbe> getFarbenListe()
 	{
-		return preis;
+		return farbenListe;
 	}
 
 	
-	public void setPreis(double preis)
+	public void setFarbenListe(List<Farbe> farbenListe)
 	{
-		this.preis = preis;
+		this.farbenListe = farbenListe;
 	}
 
 	
-	public List<String> getFarben()
+	public List<Ps> getPsListe()
 	{
-		return farben;
+		return psListe;
 	}
 
 	
-	public void setFarben(List<String> farben)
+	public void setPsListe(List<Ps> psListe)
 	{
-		this.farben = farben;
-	}
-
-	
-	public List<Integer> getPss()
-	{
-		return pss;
-	}
-
-	
-	public void setPss(List<Integer> pss)
-	{
-		this.pss = pss;
-	}
-
-	
-	public List<Double> getPreise()
-	{
-		return preise;
-	}
-
-	
-	public void setPreise(List<Double> preise)
-	{
-		this.preise = preise;
+		this.psListe = psListe;
 	}
 	
 	
-
+	@Override
+	public String toString()
+	{
+		// TODO Auto-generated method stub
+		return model;
+	}
 }

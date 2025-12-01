@@ -2,12 +2,15 @@
 package Autohaus;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JList;
 
@@ -16,10 +19,10 @@ public class View extends JFrame
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JComboBox comboBoxModel;
-	private JComboBox comboBoxFarbe;
-	private JComboBox comboBoxPS;
-	private JComboBox comboBoxExtras;
+	private JComboBox<Model> comboBoxModel;
+	private JComboBox<Farbe> comboBoxFarbe;
+	private JComboBox<Ps> comboBoxPS;
+	private JComboBox<Extras> comboBoxExtras;
 	private JLabel lblNewLabel;
 	private JLabel lblNewLabel_1;
 	private JLabel lblNewLabel_2;
@@ -33,30 +36,12 @@ public class View extends JFrame
 	private JLabel lblPreis;
 	private JLabel lblMWST;
 	private JLabel lblBrutto;
-	private JButton btnNewButton;
+	private JButton btnBestellen;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args)
-	{
-		EventQueue.invokeLater(new Runnable()
-		{
-
-			public void run()
-			{
-				try
-					{
-						View frame = new View();
-						frame.setVisible(true);
-					}
-				catch (Exception e)
-					{
-						e.printStackTrace();
-					}
-			}
-		});
-	}
+	
 
 	/**
 	 * Create the frame.
@@ -92,44 +77,44 @@ public class View extends JFrame
 		contentPane.add(getLblPreis());
 		contentPane.add(getLblMWST());
 		contentPane.add(getLblBrutto());
-		contentPane.add(getBtnNewButton());
+		contentPane.add(getBtnBestellen());
 	}
 
-	private JComboBox getComboBoxModel()
+	public JComboBox<Model> getComboBoxModel()
 	{
 		if (comboBoxModel == null)
 			{
-				comboBoxModel = new JComboBox();
+				comboBoxModel = new JComboBox<>();
 				comboBoxModel.setBounds(101, 51, 117, 22);
 			}
 		return comboBoxModel;
 	}
 
-	private JComboBox getComboBoxFarbe()
+	private JComboBox<Farbe> getComboBoxFarbe()
 	{
 		if (comboBoxFarbe == null)
 			{
-				comboBoxFarbe = new JComboBox();
+				comboBoxFarbe = new JComboBox<>();
 				comboBoxFarbe.setBounds(101, 92, 117, 22);
 			}
 		return comboBoxFarbe;
 	}
 
-	private JComboBox getComboBoxPS()
+	private JComboBox<Ps> getComboBoxPS()
 	{
 		if (comboBoxPS == null)
 			{
-				comboBoxPS = new JComboBox();
+				comboBoxPS = new JComboBox<>();
 				comboBoxPS.setBounds(101, 135, 117, 22);
 			}
 		return comboBoxPS;
 	}
 
-	private JComboBox getComboBoxExtras()
+	private JComboBox<Extras> getComboBoxExtras()
 	{
 		if (comboBoxExtras == null)
 			{
-				comboBoxExtras = new JComboBox();
+				comboBoxExtras = new JComboBox<>();
 				comboBoxExtras.setBounds(101, 174, 117, 22);
 			}
 		return comboBoxExtras;
@@ -199,7 +184,7 @@ public class View extends JFrame
 	{
 		if (listWarenkorb == null)
 			{
-				listWarenkorb = new JList();
+				listWarenkorb = new JList<>();
 				listWarenkorb.setBounds(258, 54, 195, 99);
 			}
 		return listWarenkorb;
@@ -265,13 +250,47 @@ public class View extends JFrame
 		return lblBrutto;
 	}
 
-	private JButton getBtnNewButton()
+	private JButton getBtnBestellen()
 	{
-		if (btnNewButton == null)
+		if (btnBestellen == null)
 			{
-				btnNewButton = new JButton("Auto Bestellen");
-				btnNewButton.setBounds(338, 318, 115, 23);
+				btnBestellen = new JButton("Auto Bestellen");
+				btnBestellen.setBounds(338, 318, 115, 23);
 			}
-		return btnNewButton;
+		return btnBestellen;
+	}
+
+	public void setModelAuswahl(DefaultComboBoxModel<Model> modelauswahl)
+	{
+		comboBoxModel.setModel(modelauswahl);
+		
+	}
+
+	public void setFarbeAuswahl(DefaultComboBoxModel<Farbe> farbeauswahl)
+	{
+		comboBoxFarbe.setModel(farbeauswahl);
+		
+	}
+
+	public void setPsAuswahl(DefaultComboBoxModel<Ps> psauswahl)
+	{
+		comboBoxPS.setModel(psauswahl);
+		
+	}
+
+	public void setExtraauswahl(DefaultComboBoxModel<Extras> extraauswahl)
+	{
+		comboBoxExtras.setModel(extraauswahl);
+		
+	}
+
+	public void setzeActionlistener(ItemListener modeländern, ActionListener hinzufuegen, ActionListener bestellen)
+	{
+		
+		comboBoxModel.addItemListener(modeländern);
+		btnBestaetigen.addActionListener(hinzufuegen);
+		btnBestellen.addActionListener(bestellen);
+		
+		
 	}
 }
