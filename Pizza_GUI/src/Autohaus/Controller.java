@@ -1,5 +1,8 @@
 package Autohaus;
 
+import java.rmi.dgc.DGC;
+import java.util.List;
+
 import javax.swing.DefaultComboBoxModel;
 
 import Nozama.Dateihandler;
@@ -33,6 +36,7 @@ public class Controller
 	private void ladedaten()
 	{
 		Dateihandler dh = new DateihandlerIO("autodaten.csv");
+		List<Model> modellist = dh.lesen();
 		
 	}
 

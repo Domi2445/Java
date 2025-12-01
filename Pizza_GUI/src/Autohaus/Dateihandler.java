@@ -7,20 +7,22 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+import Nozama.Produkt;
+
 public abstract class Dateihandler
 {
 	protected BufferedWriter writer;
 	protected BufferedReader reader;
 	
 	public Dateihandler( ) {}
-	public List<Auto> lesen()
+	public ArrayList<Produkt> lesen()
 	{
-		List<Auto> autos = new ArrayList<>();
+		List<Model> autos = new ArrayList<>();
 		String zeile;
 		String aktuellesmodel = "";
 		String aktuellefarbe = "";
 		Integer aktuellePS = 0;
-		Auto a;
+		Model m;
 		try
 			{
 				
@@ -35,8 +37,8 @@ public abstract class Dateihandler
 							
 							if(!model.equals(aktuellesmodel))
 								{
-									 a = new Auto(model);
-									autos.add(a)
+									 m = new Model(model);
+									autos.add(m);
 									aktuellesmodel = model;
 									aktuellefarbe = "";
 									
@@ -45,7 +47,7 @@ public abstract class Dateihandler
 							if(!farbe.equals(aktuellefarbe))
 								{
 									aktuellefarbe = farbe;
-									a.addFarbe(farbe);
+									m.addFarbe(farbe);
 								}
 							
 							if (!ps.equals(aktuellePS))

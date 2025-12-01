@@ -1,13 +1,23 @@
 
 package Nozama;
 
-public class Produkt
+import java.io.Serializable;
+
+public class Produkt implements Serializable
 {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3860256446602609874L;
+
+	
 
 	private int artikelnummer;
 	private String artikelbezeichnung;
 	private double preis;
 
+	
 	public Produkt(int artikelnummer, String artikelbezeichnung, double preis)
 	{
 
