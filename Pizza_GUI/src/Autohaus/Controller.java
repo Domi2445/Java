@@ -46,22 +46,7 @@ public class Controller
 
     private void ladedaten()
     {
-       /* Model model = new Model("Model S", new Farbe("Lila"), new Ps(70, 1000.00));
-        modelauswahl.addElement(model);
-
-        // Farben
-        farbeauswahl.addElement(new Farbe("Rot"));
-        farbeauswahl.addElement(new Farbe("Blau"));
-        farbeauswahl.addElement(new Farbe("Schwarz"));
-
-        // PS
-        psauswahl.addElement(new Ps(70, 1000.00));
-        psauswahl.addElement(new Ps(100, 1500.00));
-        psauswahl.addElement(new Ps(150, 2000.00));
-
-        // Extras
-        extraauswahl.addElement(new Extras("Ledersitze", 500.00));
-        extraauswahl.addElement(new Extras("Navigationssystem", 750.00));*/
+      
     	
     	Dateihandler dh = new DateihandlerIO("autodaten.csv");
     	List<Model> geleseneModels = dh.lesen();
