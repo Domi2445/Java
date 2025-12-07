@@ -1,4 +1,4 @@
-package Autohaus;
+package Authohaus;
 
 
 public class Farbe

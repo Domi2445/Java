@@ -1,5 +1,6 @@
-package Autohaus;
+package Authohaus;
 
+import java.util.Base64;
 
 public class Extras
 {
@@ -42,5 +43,11 @@ public class Extras
 		this.preis = preis;
 	}
 	
+	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return bezeichnung;
+	}
 	
 }

@@ -23,7 +23,7 @@ public class View extends JFrame
 	private JComboBox<Pizza> comboBoxPizza;
 	private JLabel lblNewLabel_1;
 	private JComboBox comboBoxExtras;
-	private JComboBox comboBoxGroesse;
+	private JComboBox<Groessen> comboBoxGroesse;
 	private JLabel lblNewLabel_2;
 	private JLabel lblNewLabel_3;
 	private JList<Pizza> list;
@@ -83,11 +83,11 @@ public class View extends JFrame
 		return lblNewLabel;
 	}
 
-	public JComboBox getComboBoxPizza()
+	public JComboBox<Pizza> getComboBoxPizza()
 	{
 		if (comboBoxPizza == null)
 			{
-				comboBoxPizza = new JComboBox();
+				comboBoxPizza = new JComboBox<>();
 
 				comboBoxPizza.setBounds(79, 7, 106, 22);
 			}
@@ -104,22 +104,22 @@ public class View extends JFrame
 		return lblNewLabel_1;
 	}
 
-	public JComboBox getComboBoxExtras()
+	public JComboBox<Extras> getComboBoxExtras()
 	{
 		if (comboBoxExtras == null)
 			{
-				comboBoxExtras = new JComboBox();
+				comboBoxExtras = new JComboBox<>();
 
 				comboBoxExtras.setBounds(79, 45, 106, 22);
 			}
 		return comboBoxExtras;
 	}
 
-	public JComboBox getComboBoxGroesse()
+	public JComboBox<Groessen> getComboBoxGroesse()
 	{
 		if (comboBoxGroesse == null)
 			{
-				comboBoxGroesse = new JComboBox();
+				comboBoxGroesse = new JComboBox<>();
 
 				comboBoxGroesse.setBounds(263, 7, 88, 22);
 			}
@@ -150,7 +150,7 @@ public class View extends JFrame
 	{
 		if (list == null)
 			{
-				list = new JList();
+				list = new JList<>();
 				list.setBounds(23, 87, 328, 130);
 			}
 		return list;
@@ -174,7 +174,7 @@ public class View extends JFrame
 
 	}
 
-	public void setComboBoxPizza(JComboBox comboBoxPizza)
+	public void setComboBoxPizza(JComboBox<Pizza> comboBoxPizza)
 	{
 		this.comboBoxPizza = comboBoxPizza;
 	}
@@ -184,7 +184,7 @@ public class View extends JFrame
 		this.comboBoxExtras = comboBoxExtras;
 	}
 
-	public void setComboBoxGroesse(JComboBox comboBoxGroesse)
+	public void setComboBoxGroesse(JComboBox<Groessen> comboBoxGroesse)
 	{
 		this.comboBoxGroesse = comboBoxGroesse;
 	}
